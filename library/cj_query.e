@@ -62,6 +62,15 @@ feature -- Element Change
 			name_set: name ~ a_name
 		end
 
+
+	set_prompt (a_prompt: STRING)
+		do
+			prompt := a_prompt
+		ensure
+			prompt_set: prompt ~ a_prompt
+		end
+
+
 	add_data (a_data: CJ_DATA)
 		local
 			l_data: like data

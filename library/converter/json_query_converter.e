@@ -42,7 +42,7 @@ feature -- Conversion
 				Result.set_name (l_ucs)
 			end
 			if attached {STRING_32} json.object (j.item (prompt_key), Void) as l_ucs then
-				Result.set_rel (l_ucs)
+				Result.set_prompt (l_ucs)
 			end
 			if attached {JSON_ARRAY} j.item (data_key) as ja then
 				from
