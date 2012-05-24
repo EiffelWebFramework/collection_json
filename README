@@ -1,2 +1,6 @@
 Eiffel CJ is a library to work with  Collection+JSON - Hypermedia Type,  http://www.amundsen.com/media-types/collection/
 
+The current CJ implementation does not implement the [extensions][1] proposals.
+
+[1]: https://github.com/mamund/collection-json/tree/master/extensions "extensions"
+https://groups.google.com/forum/?fromgroups#!forum/collectionjson
