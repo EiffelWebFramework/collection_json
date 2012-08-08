@@ -5,10 +5,10 @@ note
 	revision: "$Revision$"
 
 class
-	JSON_TEMPLATE_CONVERTER
-inherit
+	CJ_TEMPLATE_JSON_CONVERTER
 
-	JSON_CONVERTER
+inherit
+	CJ_JSON_CONVERTER
 
 create
 	make
@@ -37,7 +37,7 @@ feature -- Conversion
 				until
 					i > ja.count
 				loop
-					if attached {CJ_DATA} json.object (ja [i], "CJ_DATA") as b then
+					if attached {CJ_DATA} json_to_object (ja [i], {CJ_DATA}) as b then
 						Result.add_data (b)
 					end
 					i := i + 1
@@ -58,4 +58,7 @@ feature {NONE} -- Implementation
 		once
 			create Result.make_json ("data")
 		end
+note
+	copyright: "2011-2012, Javier Velilla, Jocelyn Fiat and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
 end

@@ -5,11 +5,10 @@ note
 	revision: "$Revision$"
 
 class
-	JSON_LINK_CONVERTER
+	CJ_LINK_JSON_CONVERTER
 
 inherit
-
-	JSON_CONVERTER
+	CJ_JSON_CONVERTER
 
 create
 	make
@@ -18,7 +17,7 @@ feature {NONE} -- Initialization
 
 	make
 		do
-			create object.make
+			create object.make_empty
 		end
 
 feature -- Access
@@ -29,20 +28,20 @@ feature -- Conversion
 
 	from_json (j: like to_json): detachable like object
 		do
-			create Result.make
-			if attached {STRING_32} json.object (j.item (href_key), Void) as l_ucs then
+			create Result.make_empty
+			if attached {STRING_32} json_to_object (j.item (href_key), Void) as l_ucs then
 				Result.set_href (l_ucs)
 			end
-			if attached {STRING_32} json.object (j.item (rel_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (rel_key), Void) as l_ucs then
 				Result.set_rel (l_ucs)
 			end
-			if attached {STRING_32} json.object (j.item (name_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (name_key), Void) as l_ucs then
 				Result.set_name (l_ucs)
 			end
-			if attached {STRING_32} json.object (j.item (prompt_key), Void) as l_ucs then
-				Result.set_prompt (l_ucs)
+			if attached {STRING_32} json_to_object (j.item (prompt_key), Void) as l_ucs then
+				Result.set_rel (l_ucs)
 			end
-			if attached {STRING_32} json.object (j.item (render_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (render_key), Void) as l_ucs then
 				Result.set_render (l_ucs)
 			end
 		end
@@ -52,9 +51,15 @@ feature -- Conversion
 			create Result.make
 			Result.put (json.value (o.href), href_key)
 			Result.put (json.value (o.rel), rel_key)
-			Result.put (json.value (o.prompt), prompt_key)
-			Result.put (json.value (o.name), name_key)
-			Result.put (json.value (o.render), render_key)
+			if attached o.prompt as o_prompt then
+				Result.put (json.value (o_prompt), prompt_key)
+			end
+			if attached o.name as o_name then
+				Result.put (json.value (o_name), name_key)
+			end
+			if attached o.render as o_render then
+				Result.put (json.value (o_render), render_key)
+			end
 		end
 
 feature {NONE} -- Implementation
@@ -84,4 +89,7 @@ feature {NONE} -- Implementation
 			create Result.make_json ("render")
 		end
 
+note
+	copyright: "2011-2012, Javier Velilla, Jocelyn Fiat and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
 end

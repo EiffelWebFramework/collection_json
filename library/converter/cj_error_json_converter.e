@@ -5,10 +5,10 @@ note
 	revision: "$Revision$"
 
 class
-	JSON_ERROR_CONVERTER
-inherit
+	CJ_ERROR_JSON_CONVERTER
 
-	JSON_CONVERTER
+inherit
+	CJ_JSON_CONVERTER
 
 create
 	make
@@ -17,7 +17,7 @@ feature {NONE} -- Initialization
 
 	make
 		do
-			create object.make
+			create object.make_empty
 		end
 
 feature -- Access
@@ -32,20 +32,20 @@ feature -- Conversion
 			l_code: detachable STRING_32
 			l_message: detachable STRING_32
 		do
-			if attached {STRING_32} json.object (j.item (title_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (title_key), Void) as l_ucs then
 				l_title := l_ucs
 			end
-			if attached {STRING_32} json.object (j.item (code_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (code_key), Void) as l_ucs then
 				l_code := l_ucs
 			end
-			if attached {STRING_32} json.object (j.item (message_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (message_key), Void) as l_ucs then
 				l_message := l_ucs
 			end
 			--|TODO improve this code
 			--|is there a better way to write this?
 			--|is a good idea create the Result object at the first line and then set the value
 			--|if it is attached?
-			create Result.make
+			create Result.make_empty
 			if l_title /= Void then
 				Result.set_title (l_title)
 			end
@@ -81,4 +81,7 @@ feature {NONE} -- Implementation
 		once
 			create Result.make_json ("message")
 		end
+note
+	copyright: "2011-2012, Javier Velilla, Jocelyn Fiat and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
 end
