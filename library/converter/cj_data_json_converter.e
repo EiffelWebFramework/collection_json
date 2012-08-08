@@ -5,11 +5,10 @@ note
 	revision: "$Revision$"
 
 class
-	JSON_DATA_CONVERTER
+	CJ_DATA_JSON_CONVERTER
 
 inherit
-
-	JSON_CONVERTER
+	CJ_JSON_CONVERTER
 
 create
 	make
@@ -33,13 +32,13 @@ feature -- Conversion
 			l_prompt: detachable STRING_32
 			l_value: detachable STRING_32
 		do
-			if attached {STRING_32} json.object (j.item (name_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (name_key), Void) as l_ucs then
 				l_name := l_ucs
 			end
-			if attached {STRING_32} json.object (j.item (prompt_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (prompt_key), Void) as l_ucs then
 				l_prompt := l_ucs
 			end
-			if attached {STRING_32} json.object (j.item (value_key), Void) as l_ucs then
+			if attached {STRING_32} json_to_object (j.item (value_key), Void) as l_ucs then
 				l_value := l_ucs
 			end
 			--|TODO improve this code
@@ -61,8 +60,8 @@ feature -- Conversion
 	to_json (o: like object): JSON_OBJECT
 		do
 			create Result.make
-			Result.put (json.value (o.name), name_key)
 			Result.put (json.value (o.prompt), prompt_key)
+			Result.put (json.value (o.name), name_key)
 			Result.put (json.value (o.value), value_key)
 		end
 
@@ -83,4 +82,7 @@ feature {NONE} -- Implementation
 			create Result.make_json ("value")
 		end
 
+note
+	copyright: "2011-2012, Javier Velilla, Jocelyn Fiat and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
 end -- class JSON_DATA_CONVERTER

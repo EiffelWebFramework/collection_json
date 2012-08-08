@@ -5,9 +5,9 @@ note
 	revision: "$Revision$"
 	example: "[
 		{
-			"href":URI
-			data: [ARRAY]
-			links :[ARRAY]
+			"href": URI
+			"data": [ARRAY]
+			"links": [ARRAY]
 		}
 	]"
 
@@ -15,13 +15,19 @@ class
 	CJ_ITEM
 
 create
-	make
+	make,
+	make_empty
 
 feature {NONE} -- Initialization
 
-	make
+	make_empty
 		do
-			href := ""
+			make ("")
+		end
+
+	make (a_href: like href)
+		do
+			href := a_href
 		end
 
 feature -- Access
@@ -29,15 +35,15 @@ feature -- Access
 	href: STRING
 			-- URI
 
-	data: detachable LINKED_LIST [CJ_DATA]
+	data: detachable ARRAYED_LIST [CJ_DATA]
 			--may have a data array
 
-	links: detachable LINKED_LIST [CJ_LINK]
+	links: detachable ARRAYED_LIST [CJ_LINK]
 			--may have a links array
 
 feature -- Element Change
 
-	set_href (a_href: STRING)
+	set_href (a_href: like href)
 		do
 			href := a_href
 		ensure
@@ -50,7 +56,7 @@ feature -- Element Change
 		do
 			l_data := data
 			if l_data = Void then
-				create l_data.make
+				create l_data.make (1)
 				data := l_data
 			end
 			l_data.force (a_data)
@@ -62,10 +68,13 @@ feature -- Element Change
 		do
 			l_links := links
 			if l_links = Void then
-				create l_links.make
+				create l_links.make (1)
 				links := l_links
 			end
 			l_links.force (a_link)
 		end
 
+note
+	copyright: "2011-2012, Javier Velilla, Jocelyn Fiat and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
 end

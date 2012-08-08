@@ -25,12 +25,12 @@ feature {NONE} --Initialization
 
 	make
 		do
-			create data.make
+			create data.make (0)
 		end
 
 feature -- Access
 
-	data: LINKED_LIST [CJ_DATA]
+	data: ARRAYED_LIST [CJ_DATA]
 
 feature -- Element Change
 
@@ -39,4 +39,7 @@ feature -- Element Change
 			data.force (a_data)
 		end
 
+note
+	copyright: "2011-2012, Javier Velilla, Jocelyn Fiat and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
 end

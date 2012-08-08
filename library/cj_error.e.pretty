@@ -8,11 +8,12 @@ note
 	revision: "$Revision$"
 	example: "[
 		{
-		  "error": {
+		 "error":
+		 {
 		 	"title" : STRING,
 		 	"code"  : STRING,
 		 	"message" : STRING
-		  }
+		 }
 		}
 	]"
 
@@ -20,21 +21,15 @@ class
 	CJ_ERROR
 
 create
-	make,
-	make_empty
+	make
 
 feature {NONE} -- Initialization
 
-	make_empty
+	make
 		do
-			make ("", "", "")
-		end
-
-	make (a_title: like title; a_code: like code; a_message: like message)
-		do
-			title := a_title
-			code := a_code
-			message := a_message
+			title := ""
+			code := ""
+			message := ""
 		end
 
 feature -- Access
@@ -47,21 +42,21 @@ feature -- Access
 
 feature -- Element Change
 
-	set_title (a_title: like title)
+	set_title (a_title: STRING)
 		do
 			title := a_title
 		ensure
 			title_set: title ~ a_title
 		end
 
-	set_code (a_code: like code)
+	set_code (a_code: STRING)
 		do
 			code := a_code
 		ensure
 			code_set: code ~ a_code
 		end
 
-	set_message (a_message: like message)
+	set_message (a_message: STRING)
 		do
 			message := a_message
 		ensure
