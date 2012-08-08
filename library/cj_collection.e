@@ -23,6 +23,7 @@ note
 			}
 		}
 	]"
+	EIS: "name=Collection+JSON - Hypermedia Type", "protocol=URI", "src=http://www.amundsen.com/media-types/collection/", "tag=homepage, specification"
 
 class
 	CJ_COLLECTION
