@@ -42,23 +42,17 @@ feature -- Conversion
 
     to_json (o: like object): detachable JSON_ARRAY
         local
-            c: ITERATION_CURSOR [detachable ANY]
-            jv: detachable JSON_VALUE
 			failed: BOOLEAN
         do
             create Result.make_array
-            from
-            	c := o.new_cursor
-            until
-                c.after
+            across
+            	o as c
             loop
-                jv := json.value (c.item)
-            	if jv /= Void then
+            	if attached json.value (c.item) as jv then
             		Result.add (jv)
             	else
 					failed := True
             	end
-				c.forth
             end
 			if failed then
 				Result := Void
