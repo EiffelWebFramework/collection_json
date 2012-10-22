@@ -27,42 +27,33 @@ feature -- Access
 feature -- Conversion
 
 	from_json (j: like to_json): detachable like object
-		local
-			l_name: detachable STRING_32
-			l_prompt: detachable STRING_32
-			l_value: detachable STRING_32
 		do
-			if attached {STRING_32} json_to_object (j.item (name_key), Void) as l_ucs then
-				l_name := l_ucs
+			create Result.make
+			if attached {STRING_32} json_to_object (j.item (name_key), Void) as l_name then
+				Result.set_name (l_name)
 			end
-			if attached {STRING_32} json_to_object (j.item (prompt_key), Void) as l_ucs then
-				l_prompt := l_ucs
+			if attached {STRING_32} json_to_object (j.item (prompt_key), Void) as l_prompt then
+				Result.set_prompt (l_prompt)
 			end
-			if attached {STRING_32} json_to_object (j.item (value_key), Void) as l_ucs then
-				l_value := l_ucs
+			if attached {STRING_32} json_to_object (j.item (value_key), Void) as l_value then
+				Result.set_value (l_value)
 			end
 			--|TODO improve this code
 			--|is there a better way to write this?
 			--|is a good idea create the Result object at the first line and then set the value
 			--|if it is attached?
-			create Result.make
-			if l_name /= Void then
-				Result.set_name (l_name)
-			end
-			if l_prompt /= Void then
-				Result.set_prompt (l_prompt)
-			end
-			if l_value /= Void then
-				Result.set_value (l_value)
-			end
 		end
 
 	to_json (o: like object): JSON_OBJECT
 		do
 			create Result.make
-			Result.put (json.value (o.prompt), prompt_key)
 			Result.put (json.value (o.name), name_key)
-			Result.put (json.value (o.value), value_key)
+			if attached o.prompt as o_prompt then
+				Result.put (json.value (o_prompt), prompt_key)
+			end
+			if attached o.value as o_value then
+				Result.put (json.value (o_value), value_key)
+			end
 		end
 
 feature {NONE} -- Implementation

@@ -66,8 +66,12 @@ feature -- Conversion
 		do
 			create Result.make
 			Result.put (json.value (o.href), href_key)
-			Result.put (json.value (o.data), data_key)
-			Result.put (json.value (o.links), links_key)
+			if attached o.data as o_data then
+				Result.put (json.value (o_data), data_key)
+			end
+			if attached o.links as o_links then
+				Result.put (json.value (o_links), links_key)
+			end
 		end
 
 feature {NONE} -- Implementation

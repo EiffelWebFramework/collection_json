@@ -105,11 +105,21 @@ feature -- Conversion
 			create l_collection.make
 			l_collection.put (json.value (o.version), version_key)
 			l_collection.put (json.value (o.href), href_key)
-			l_collection.put (json.value (o.links), links_key)
-			l_collection.put (json.value (o.items), items_key)
-			l_collection.put (json.value (o.queries), queries_key)
-			l_collection.put (json.value (o.template), template_key)
-			l_collection.put (json.value (o.error), error_key)
+			if attached o.links as o_links then
+				l_collection.put (json.value (o_links), links_key)
+			end
+			if attached o.items as o_items then
+				l_collection.put (json.value (o_items), items_key)
+			end
+			if attached o.queries as o_queries then
+				l_collection.put (json.value (o_queries), queries_key)
+			end
+			if attached o.template as o_template then
+				l_collection.put (json.value (o_template), template_key)
+			end
+			if attached o.error as o_error then
+				l_collection.put (json.value (o_error), error_key)
+			end
 
 			create Result.make
 			Result.put (l_collection, collection_key)
