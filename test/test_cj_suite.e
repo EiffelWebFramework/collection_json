@@ -223,7 +223,7 @@ feature -- Test routines
 		local
 			l_doc : detachable CJ_TEMPLATE
 		do
-			l_doc := json_to_cjtempalte ("write_representation.json")
+			l_doc := json_to_cj_template ("write_representation.json")
 			assert ("Not Void", l_doc /= Void)
 			if attached {CJ_TEMPLATE } l_doc  as ll_doc then
 					assert ("Expect 4 elements", ll_doc.data.count = 4)
@@ -234,7 +234,7 @@ feature -- Test routines
 feature -- Implementation
 
 
-	json_to_cjtempalte (fn: STRING): detachable CJ_TEMPLATE
+	json_to_cj_template (fn: STRING): detachable CJ_TEMPLATE
 		local
 			dc: CJ_DATA_JSON_CONVERTER
 			tc: CJ_TEMPLATE_JSON_CONVERTER
