@@ -37,6 +37,8 @@ feature -- Conversion
 			end
 			if attached {STRING_32} json_to_object (j.item (value_key), Void) as l_value then
 				Result.set_value (l_value)
+			elseif	attached {BOOLEAN} json_to_object (j.item (value_key), Void) as l_value then
+				Result.set_value (l_value.out)
 			end
 			--|TODO improve this code
 			--|is there a better way to write this?
@@ -74,6 +76,6 @@ feature {NONE} -- Implementation
 		end
 
 note
-	copyright: "2011-2012, Javier Velilla, Jocelyn Fiat and others"
+	copyright: "2011-2013, Javier Velilla, Jocelyn Fiat and others"
 	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
 end -- class JSON_DATA_CONVERTER
