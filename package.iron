@@ -1,0 +1,15 @@
+package collection+json
+
+project
+	collection_json = "library/collection%2Bjson-safe.ecf"
+	collection_json = "library/collection%2Bjson.ecf"
+
+note
+	title: Collection+JSON library
+	description: Parser and Printer for Collection+JSON mediatype
+	tags: json, api, collection+json
+	license: Eiffel Forum v2
+	copyright: Javier Velilla, Jocelyn Fiat and Eiffel Software
+	link[source]: "Source" https://github.com/EiffelWebFramework/collection_json.git
+
+end
